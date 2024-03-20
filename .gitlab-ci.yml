@@ -1,0 +1,29 @@
+stages:
+  - deploy
+
+.deploy-common: &deploy-common
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+    - cp -r dist/. ~/$CI_ENVIRONMENT_SLUG/frontend
+
+deploy:staging:
+  environment: staging
+  tags:
+    - bibimoney
+    - staging
+  <<: *deploy-common
+  only:
+    refs:
+      - staging
+
+deploy:production:
+  environment: production
+  tags:
+    - bibimoney
+    - production
+  <<: *deploy-common
+  only:
+    refs:
+      - main
