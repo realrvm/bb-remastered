@@ -28,3 +28,9 @@ export const MAX_LOAN_VALUE = 1_000_000;
 
 // custom interest rate
 export const CUSTOM_INTEREST_RATE = 18;
+
+// telegram
+export const TELEGRAM = "https://t.me/bibimoney";
+
+// whatsapp
+export const WHATSAPP = "whatsapp://send?phone=1234567890";

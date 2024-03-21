@@ -1,7 +1,13 @@
+import { Container } from "@/widgets/container";
+import { SimpleHeader } from "@/widgets/header";
+
 const Auth = () => {
   return (
-    <div>Auth</div>
-  )
-}
+    <Container>
+      <SimpleHeader />
+      <p>Auth</p>
+    </Container>
+  );
+};
 
-export default Auth
+export default Auth;
