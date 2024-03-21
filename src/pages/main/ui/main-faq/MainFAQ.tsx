@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { main_faqs } from "@/shared/lib/variables/main/main-faq";
-import { Accordion } from "@/features/accordion";
+import { Accordion } from "@/widgets/accordion";
 
 export const MainFAQ: FC = () => {
   return (

@@ -1,11 +1,10 @@
 import { FC } from "react";
 
-import { Calculator } from "@/features/calculator";
-
 import { cn } from "@/shared/lib/cn";
 import { useWindowWidth } from "@/shared/lib/hooks/useWindowWidth";
 import { DESKTOP_WIDTH, NOTEBOOK_WIDTH } from "@/shared/lib/constants";
 import { main_proposals } from "@/shared/lib/variables/main/main-intro";
+import { Calculator } from "@/widgets/calculator";
 
 import styles from "./styles.module.css";
 

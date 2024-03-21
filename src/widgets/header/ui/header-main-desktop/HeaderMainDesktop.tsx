@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Logo } from "@/shared/ui/icons";
 import { ButtonThemes, Widths } from "@/shared/lib/enums";
@@ -6,6 +7,9 @@ import { AppLink } from "@/shared/ui/app-link";
 import { Button } from "@/shared/ui/button";
 
 export const HeaderMainDesktop: FC = () => {
+  // TODO
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex items-center gap-9">
@@ -31,7 +35,9 @@ export const HeaderMainDesktop: FC = () => {
         <Button variant={ButtonThemes.SECONDARY} className="btn-small">
           Личный кабинет
         </Button>
-        <Button className="btn-small">Получить займ</Button>
+        <Button className="btn-small" onClick={() => navigate("/auth")}>
+          Получить займ
+        </Button>
       </div>
     </>
   );

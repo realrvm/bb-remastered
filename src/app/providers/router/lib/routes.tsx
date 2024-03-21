@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "@/app/App";
@@ -8,6 +9,7 @@ import { Auth } from "@/pages/auth";
 import { Application } from "@/pages/application";
 import { Account } from "@/pages/account";
 import { NotFound } from "@/pages/not-found";
+import { ProtectedRoute } from "../ui/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +21,29 @@ export const router = createBrowserRouter([
         path: "",
         element: <Main />,
       },
-      { path: Routes.LOAN, element: <Loan /> },
-      { path: Routes.AUTH, element: <Auth /> },
-      { path: Routes.APPLICATION, element: <Application /> },
-      { path: Routes.ACCOUNT, element: <Account /> },
+      {
+        path: Routes.AUTH,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Auth />
+          </Suspense>
+        ),
+      },
+      {
+        path: Routes.LOAN,
+        element: <ProtectedRoute />,
+        children: [{ path: "", element: <Loan /> }],
+      },
+      {
+        path: Routes.APPLICATION,
+        element: <ProtectedRoute />,
+        children: [{ path: "", element: <Application /> }],
+      },
+      {
+        path: Routes.ACCOUNT,
+        element: <ProtectedRoute />,
+        children: [{ path: "", element: <Account /> }],
+      },
     ],
   },
 ]);

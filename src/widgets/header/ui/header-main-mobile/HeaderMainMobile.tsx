@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import Hamburger from "hamburger-react";
 
-import { Drawer } from "@/features/drawer";
 import { AppLink } from "@/shared/ui/app-link";
 import { Logo } from "@/shared/ui/icons";
 import { Button } from "@/shared/ui/button";
 import { ButtonThemes } from "@/shared/lib/enums";
+import { Drawer } from "@/widgets/drawer";
 
 export const HeaderMainMobile: FC = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);

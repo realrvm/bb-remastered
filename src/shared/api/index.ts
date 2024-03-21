@@ -5,21 +5,16 @@ import type {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 
-import {
-  API_URL,
-  STORAGE,
-  STORAGE_TOKEN,
-  TOKEN_REFRESH,
-} from "@/shared/lib/constants";
+import { API_URL, TOKEN_REFRESH } from "@/shared/lib/constants";
 import { RootState } from "@/app/providers/rtk/";
+import { authActions } from "@/features/auth";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
-    console.log(state);
-    // TODO
-    const token = "";
+
+    const token = state.auth.accessToken;
 
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
@@ -34,13 +29,14 @@ const baseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  const { dispatch, getState } = api;
+  const state = getState() as RootState;
+
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
     try {
-      const token = JSON.parse(
-        STORAGE.getItem(STORAGE_TOKEN) || JSON.stringify(""),
-      ) as string;
+      const token = state.auth.refreshToken;
 
       const response = await baseQuery(
         {
@@ -52,12 +48,18 @@ const baseQueryWithReauth: BaseQueryFn<
         extraOptions,
       );
 
-      // TODO
       if (response.data) {
-        console.log(response.data);
+        dispatch(
+          authActions.setAccessToken({
+            access: (response.data as { access: string }).access,
+          }),
+        );
+        result = await baseQuery(args, api, extraOptions);
       }
-    } finally {
-      console.log("finally");
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(e.message);
+      }
     }
   } else {
     result = await baseQuery(args, api, extraOptions);

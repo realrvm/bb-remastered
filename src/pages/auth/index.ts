@@ -1,1 +1,5 @@
-export { Auth } from "./ui/Auth";
+import { lazy } from "react";
+
+const Auth = lazy(() => import("./ui/Auth"));
+
+export { Auth };
