@@ -5,7 +5,6 @@ const Auth = () => {
   return (
     <Container>
       <SimpleHeader />
-      <p>Auth</p>
     </Container>
   );
 };

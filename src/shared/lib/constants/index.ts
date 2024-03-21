@@ -34,3 +34,6 @@ export const TELEGRAM = "https://t.me/bibimoney";
 
 // whatsapp
 export const WHATSAPP = "whatsapp://send?phone=1234567890";
+
+// is digits
+export const DIGITS = new RegExp(/^\d+$/);

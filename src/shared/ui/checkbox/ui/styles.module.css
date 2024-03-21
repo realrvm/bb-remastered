@@ -1,0 +1,40 @@
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--color-common-white);
+  margin: 0;
+  font: inherit;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-border-gray);
+  border-radius: 3px;
+  display: grid;
+  place-content: center;
+}
+
+.checkbox:before {
+  content: "";
+  width: 20px;
+  height: 14px;
+  transform: scale(0);
+  transition: 100ms transform ease-in-out;
+  box-shadow: inset 16px 16px var(--color-common-white);
+  transform-origin: bottom left;
+  clip-path: polygon(
+    20.4% 42.67%,
+    8.61% 57.2%,
+    44.09% 86%,
+    84.25% 18.75%,
+    71.31% 11.02%,
+    41.67% 60.64%
+  );
+}
+
+.checkbox:checked {
+  background-color: var(--color-common-brand);
+  border: 2px solid var(--color-common-brand);
+}
+
+.checkbox:checked:before {
+  transform: scale(1);
+}
