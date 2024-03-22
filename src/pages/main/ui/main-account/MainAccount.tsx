@@ -61,7 +61,7 @@ const MainAccountLink: FC = () => {
   return (
     <Button
       className="w-full md:w-auto text-center py-3 px-5 heading-5"
-      onClick={() => navigate("/account")}
+      onClick={() => navigate("auth/account")}
     >
       Войти в личный кабинет
     </Button>

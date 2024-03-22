@@ -1,6 +1,5 @@
 export const enum Routes {
   MAIN = "/",
-  LOAN = "loans",
   AUTH = "auth",
   APPLICATION = "application",
   ACCOUNT = "account",

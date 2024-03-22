@@ -4,8 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "@/app/App";
 import { Main } from "@/pages/main";
 import { Routes } from "@/shared/lib/enums";
-import { Loan } from "@/pages/loan/ui/Loan";
-import { Auth } from "@/pages/auth";
+import { Auth, AuthAccount, AuthLoan } from "@/pages/auth";
 import { Application } from "@/pages/application";
 import { Account } from "@/pages/account";
 import { NotFound } from "@/pages/not-found";
@@ -28,11 +27,24 @@ export const router = createBrowserRouter([
             <Auth />
           </Suspense>
         ),
-      },
-      {
-        path: Routes.LOAN,
-        element: <ProtectedRoute />,
-        children: [{ path: "", element: <Loan /> }],
+        children: [
+          {
+            path: "account",
+            element: (
+              <Suspense fallback={<div>Loading...</div>}>
+                <AuthAccount />
+              </Suspense>
+            ),
+          },
+          {
+            path: "loan",
+            element: (
+              <Suspense fallback={<div>Loading...</div>}>
+                <AuthLoan />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
         path: Routes.APPLICATION,

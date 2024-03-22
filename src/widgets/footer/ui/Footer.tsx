@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AppLink } from "@/shared/ui/app-link";
 import { Button } from "@/shared/ui/button";
@@ -14,6 +15,8 @@ import {
 import { AppImage } from "@/shared/ui/app-image";
 
 export const Footer: FC = () => {
+  const navigate = useNavigate();
+
   return (
     <footer className="bg-brand-light py-[1.75rem] md:py-12">
       <Container>
@@ -21,7 +24,7 @@ export const Footer: FC = () => {
           <AppLink to="/">
             <Logo />
           </AppLink>
-          <Button>Получить займ</Button>
+          <Button onClick={() => navigate("auth/loan")}>Получить займ</Button>
         </div>
         <div className="flex flex-col gap-2.5 pb-6 md:gap-[112px] md:flex-row">
           <div className="flex-1">

@@ -6,6 +6,7 @@ import {
   useCallback,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import RangeSlider from "react-range-slider-input";
 
 import { Button } from "@/shared/ui/button";
@@ -32,6 +33,7 @@ export const Calculator: FC = () => {
   const [rangeValue, setRangeValue] = useState(1);
   const [marketPrice, setMarketPrice] = useState("");
   const [activeTerm, setActiveTerm] = useState<Months>(terms[0]);
+  const navigate = useNavigate();
 
   const loanAction = useActionCreators(loanActions);
 
@@ -89,7 +91,7 @@ export const Calculator: FC = () => {
           />
         </div>
       </div>
-      <Button>Получить деньги</Button>
+      <Button onClick={() => navigate("auth/loan")}>Получить деньги</Button>
     </form>
   );
 };

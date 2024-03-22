@@ -32,6 +32,7 @@ export default {
       "border-gray": "var(--color-border-gray)",
       "border-dark": "var(--color-border-dark)",
       "icon-gray": "var(--color-icon-gray)",
+      "icon-bg": "var(--color-icon-bg)",
       "special-red": "var(--color-special-red)",
       "special-green": "var(--color-special-green)",
       "special-orange": "var(--color-special-orange)",

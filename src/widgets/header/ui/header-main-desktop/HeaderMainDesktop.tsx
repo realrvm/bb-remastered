@@ -7,7 +7,6 @@ import { AppLink } from "@/shared/ui/app-link";
 import { Button } from "@/shared/ui/button";
 
 export const HeaderMainDesktop: FC = () => {
-  // TODO
   const navigate = useNavigate();
 
   return (
@@ -32,10 +31,14 @@ export const HeaderMainDesktop: FC = () => {
         </div>
       </div>
       <div className="flex gap-x-2">
-        <Button variant={ButtonThemes.SECONDARY} className="btn-small">
+        <Button
+          variant={ButtonThemes.SECONDARY}
+          className="btn-small"
+          onClick={() => navigate("auth/account")}
+        >
           Личный кабинет
         </Button>
-        <Button className="btn-small" onClick={() => navigate("/auth")}>
+        <Button className="btn-small" onClick={() => navigate("auth/loan")}>
           Получить займ
         </Button>
       </div>

@@ -7,19 +7,30 @@ type CheckboxProps = {
   label: string;
   isChecked?: boolean;
   handleCheck: (value: boolean) => void;
+  className?: string;
 } & ComponentPropsWithoutRef<"input">;
 
 export const Checkbox: FC<CheckboxProps> = forwardRef<
   HTMLInputElement,
   Omit<CheckboxProps, "ref">
 >((props, ref) => {
-  const { isChecked = false, label, handleCheck, ...rest } = props;
+  const {
+    isChecked = false,
+    label,
+    handleCheck,
+    className = "",
+    ...rest
+  } = props;
 
   return (
     <label className="flex gap-2">
       <input
         type="checkbox"
-        className={clsx(styles["checkbox"], { [styles["checked"]]: isChecked })}
+        className={clsx(
+          styles["checkbox"],
+          { [styles["checked"]]: isChecked },
+          className,
+        )}
         checked={isChecked}
         onChange={(e) => handleCheck(e.target.checked)}
         ref={ref}
