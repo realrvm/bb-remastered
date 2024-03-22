@@ -1,12 +1,11 @@
-import { useState } from "react";
-
 import { Button } from "@/shared/ui/button";
 import { Account } from "@/shared/ui/icons";
 import { InputMask } from "@/shared/ui/input-mask";
+import { Loader } from "@/shared/ui/loader";
+import { useRegister } from "../../lib/hooks";
 
 const AuthAccount = () => {
-  const [phoneValue, setPhoneValue] = useState("");
-  console.log(phoneValue);
+  const [setPhoneValue, isLoadingRegistration, handleSubmit] = useRegister();
 
   return (
     <>
@@ -20,11 +19,18 @@ const AuthAccount = () => {
         Введите номер телефона, на который вы оформили займ.На него вы получите
         СМС с кодом.
       </p>
-      <form className="flex flex-col max-w-full md:max-w-[408px] h-full md:h-auto">
-        <label className="mb-6">
-          <span className="inline-block mb-2">Номер телефона</span>
-          <InputMask setCard={setPhoneValue} />
-        </label>
+      <form
+        className="flex flex-col max-w-full md:max-w-[408px] h-full md:h-auto"
+        onSubmit={handleSubmit}
+      >
+        {isLoadingRegistration ? (
+          <Loader className="min-w-[300px] flex justify-center mb-[50px]" />
+        ) : (
+          <label className="mb-6">
+            <span className="inline-block mb-2">Номер телефона</span>
+            <InputMask setCard={setPhoneValue} />
+          </label>
+        )}
         <Button>Получить код из СМС</Button>
       </form>
     </>

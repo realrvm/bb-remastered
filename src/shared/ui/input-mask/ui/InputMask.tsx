@@ -6,13 +6,13 @@ export const InputMask: FC<{ setCard: (card: string) => void }> = memo(
 
     return (
       <div className="relative w-full md:w-auto">
-        <span className="absolute top-3 left-3">+7</span>
+        <span className="absolute top-[13px] left-3">+7</span>
         <input
           type="tel"
           ref={inputCard}
           onChange={handleChange}
           placeholder="(000) 000-00-00"
-          className="w-full py-3 pr-3 pl-[38px] mb-6 rounded-lg outline-none border border-border-gray hover:border-brand-hover focus:border-common-brand placholder:text-text-gray"
+          className="w-full py-3 pr-3 pl-[38px] mb-6 rounded-lg outline-none border border-border-gray hover:border-brand-hover focus:hover-common-brand placholder:text-text-gray"
         />
       </div>
     );
