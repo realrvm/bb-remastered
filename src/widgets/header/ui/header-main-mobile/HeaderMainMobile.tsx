@@ -4,8 +4,9 @@ import Hamburger from "hamburger-react";
 import { AppLink } from "@/shared/ui/app-link";
 import { Logo } from "@/shared/ui/icons";
 import { Button } from "@/shared/ui/button";
-import { ButtonThemes } from "@/shared/lib/enums";
+import { ButtonThemes, TargetPages } from "@/shared/lib/enums";
 import { Drawer } from "@/widgets/drawer";
+import { useNavigateTo } from "@/shared/lib/hooks/useNavigateTo";
 
 export const HeaderMainMobile: FC = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
@@ -31,6 +32,16 @@ export const HeaderMainMobile: FC = () => {
 };
 
 const DrawerContent = () => {
+  const {
+    handleNavigateTo: handleNavigateToProfile,
+    isNavigateFetching: isNavigateFetchingToProfile,
+  } = useNavigateTo(TargetPages.PROFILE);
+
+  const {
+    handleNavigateTo: handleNavigateToApplication,
+    isNavigateFetching: isNavigateFetchingToApplication,
+  } = useNavigateTo(TargetPages.APPLICATION);
+
   return (
     <>
       <div className="rounded-lg p-0.5 text-center border border-border-gray bg-bg-light-gray grid grid-cols-2 gap-x-1 mb-[38px]">
@@ -48,8 +59,23 @@ const DrawerContent = () => {
         </AppLink>
       </div>
       <div className="flex flex-col gap-3">
-        <Button>Получить займ</Button>
-        <Button variant={ButtonThemes.SECONDARY}>Личный кабинет</Button>
+        <Button
+          onClick={handleNavigateToApplication}
+          disabled={
+            isNavigateFetchingToProfile || isNavigateFetchingToApplication
+          }
+        >
+          Получить займ
+        </Button>
+        <Button
+          variant={ButtonThemes.SECONDARY}
+          onClick={handleNavigateToProfile}
+          disabled={
+            isNavigateFetchingToProfile || isNavigateFetchingToApplication
+          }
+        >
+          Личный кабинет
+        </Button>
       </div>
     </>
   );

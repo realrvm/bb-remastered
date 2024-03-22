@@ -14,33 +14,28 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: (create) => ({
-    setAccessToken: create.reducer<{ access: string }>((state, { payload }) => {
+    setAccessToken: create.reducer<string>((state, { payload }) => {
       try {
-        accessTokenSchema.parse(payload.access);
+        accessTokenSchema.parse(payload);
 
-        state.accessToken = payload.access;
+        state.accessToken = payload;
       } catch (e) {
         if (e instanceof ZodError) {
           console.log(e.errors[0].message);
         }
       }
-
-      state.accessToken = "";
     }),
-    setRefreshToken: create.reducer<{ refresh: string }>(
-      (state, { payload }) => {
-        try {
-          refreshTokenSchema.parse(payload.refresh);
+    setRefreshToken: create.reducer<string>((state, { payload }) => {
+      try {
+        refreshTokenSchema.parse(payload);
 
-          state.refreshToken = payload.refresh;
-        } catch (e) {
-          if (e instanceof ZodError) {
-            console.log(e.errors[0].message);
-          }
+        state.refreshToken = payload;
+      } catch (e) {
+        if (e instanceof ZodError) {
+          console.log(e.errors[0].message);
         }
-        state.refreshToken = "";
-      },
-    ),
+      }
+    }),
   }),
   selectors: {
     getAccessToken: (state) => state.accessToken,

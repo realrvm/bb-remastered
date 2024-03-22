@@ -1,13 +1,21 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { Logo } from "@/shared/ui/icons";
-import { ButtonThemes, Widths } from "@/shared/lib/enums";
+import { ButtonThemes, TargetPages, Widths } from "@/shared/lib/enums";
 import { AppLink } from "@/shared/ui/app-link";
 import { Button } from "@/shared/ui/button";
+import { useNavigateTo } from "@/shared/lib/hooks/useNavigateTo";
 
 export const HeaderMainDesktop: FC = () => {
-  const navigate = useNavigate();
+  const {
+    handleNavigateTo: handleNavigateToProfile,
+    isNavigateFetching: isNavigateFetchingToProfile,
+  } = useNavigateTo(TargetPages.PROFILE);
+
+  const {
+    handleNavigateTo: handleNavigateToApplication,
+    isNavigateFetching: isNavigateFetchingToApplication,
+  } = useNavigateTo(TargetPages.APPLICATION);
 
   return (
     <>
@@ -34,11 +42,20 @@ export const HeaderMainDesktop: FC = () => {
         <Button
           variant={ButtonThemes.SECONDARY}
           className="btn-small"
-          onClick={() => navigate("auth/account")}
+          onClick={handleNavigateToProfile}
+          disabled={
+            isNavigateFetchingToProfile || isNavigateFetchingToApplication
+          }
         >
           Личный кабинет
         </Button>
-        <Button className="btn-small" onClick={() => navigate("auth/loan")}>
+        <Button
+          className="btn-small"
+          onClick={handleNavigateToApplication}
+          disabled={
+            isNavigateFetchingToProfile || isNavigateFetchingToApplication
+          }
+        >
           Получить займ
         </Button>
       </div>

@@ -2,8 +2,15 @@ export const enum Routes {
   MAIN = "/",
   AUTH = "auth",
   APPLICATION = "application",
-  ACCOUNT = "account",
+  PROFILE = "profile",
   NOT_FOUND = "*",
+}
+
+export const enum TargetPages {
+  PROFILE = Routes.PROFILE,
+  APPLICATION = Routes.APPLICATION,
+  AUTH = Routes.AUTH,
+  INITIAL = "",
 }
 
 export const enum ButtonThemes {
@@ -18,4 +25,9 @@ export const enum ButtonThemes {
 export const enum Widths {
   DESKTOP = "desktop",
   MOBILE = "mobile",
+}
+
+export const enum ServerErrors {
+  WRONG_PHONE = "message is denied",
+  WRONG_SMS = "No active account found with the given credentials",
 }

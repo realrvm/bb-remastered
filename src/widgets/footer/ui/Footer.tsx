@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { AppLink } from "@/shared/ui/app-link";
 import { Button } from "@/shared/ui/button";
@@ -13,18 +12,27 @@ import {
   BIBIMONEY_OGRN,
 } from "@/shared/lib/variables/footer/footer";
 import { AppImage } from "@/shared/ui/app-image";
+import { useNavigateTo } from "@/shared/lib/hooks/useNavigateTo";
+import { TargetPages } from "@/shared/lib/enums";
+import { cn } from "@/shared/lib/cn";
 
-export const Footer: FC = () => {
-  const navigate = useNavigate();
+export const Footer: FC<{ className?: string }> = ({ className = "" }) => {
+  const { handleNavigateTo: handleNavigateToApplication, isNavigateFetching } =
+    useNavigateTo(TargetPages.APPLICATION);
 
   return (
-    <footer className="bg-brand-light py-[1.75rem] md:py-12">
+    <footer className={cn("bg-brand-light py-[1.75rem] md:py-12", className)}>
       <Container>
         <div className="flex justify-between items-center gap-5 mb-8 flex-col min-[400px]:flex-row min-[400px]:gap-0">
           <AppLink to="/">
             <Logo />
           </AppLink>
-          <Button onClick={() => navigate("auth/loan")}>Получить займ</Button>
+          <Button
+            onClick={handleNavigateToApplication}
+            disabled={isNavigateFetching}
+          >
+            Получить займ
+          </Button>
         </div>
         <div className="flex flex-col gap-2.5 pb-6 md:gap-[112px] md:flex-row">
           <div className="flex-1">

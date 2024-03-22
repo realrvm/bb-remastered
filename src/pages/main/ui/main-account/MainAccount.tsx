@@ -3,7 +3,8 @@ import { FC } from "react";
 import { AppImage } from "@/shared/ui/app-image";
 import { Button } from "@/shared/ui/button";
 import { Calendar, Cash, CreditCard, Info } from "@/shared/ui/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigateTo } from "@/shared/lib/hooks/useNavigateTo";
+import { TargetPages } from "@/shared/lib/enums";
 
 export const MainAccount: FC = () => {
   return (
@@ -56,12 +57,14 @@ export const MainAccount: FC = () => {
 };
 
 const MainAccountLink: FC = () => {
-  const navigate = useNavigate();
+  const { handleNavigateTo: handleNavigateToProfile, isNavigateFetching } =
+    useNavigateTo(TargetPages.PROFILE);
 
   return (
     <Button
       className="w-full md:w-auto text-center py-3 px-5 heading-5"
-      onClick={() => navigate("auth/account")}
+      onClick={handleNavigateToProfile}
+      disabled={isNavigateFetching}
     >
       Войти в личный кабинет
     </Button>

@@ -1,7 +1,13 @@
 import { lazy } from "react";
 
 const Auth = lazy(() => import("./ui/Auth"));
-const AuthLoan = lazy(() => import("./ui/auth-loan/AuthLoan"));
-const AuthAccount = lazy(() => import("./ui/auth-account/AuthAccount"));
+const AuthApplication = lazy(
+  () => import("./ui/auth-application/AuthApplication"),
+);
+const AuthProfile = lazy(() => import("./ui/auth-profile/AuthProfile"));
+const AuthOTP = lazy(() => import("./ui/auth-otp/AuthOTP"));
 
-export { Auth, AuthLoan, AuthAccount };
+export { Auth, AuthApplication, AuthProfile, AuthOTP };
+
+export { useObtainApi } from "./model/api/obtainApi";
+export { useRegisterApi } from "./model/api/registerApi";

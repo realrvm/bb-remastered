@@ -6,7 +6,6 @@ import {
   useCallback,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
 import RangeSlider from "react-range-slider-input";
 
 import { Button } from "@/shared/ui/button";
@@ -26,14 +25,17 @@ import { useHelpText, useLoanCalculator } from "../lib/hooks";
 
 import { useActionCreators } from "@/app/providers/rtk";
 import { loanActions } from "@/entities/loan";
+import { useNavigateTo } from "@/shared/lib/hooks/useNavigateTo";
 
 import "react-range-slider-input/dist/style.css";
+import { TargetPages } from "@/shared/lib/enums";
 
 export const Calculator: FC = () => {
   const [rangeValue, setRangeValue] = useState(1);
   const [marketPrice, setMarketPrice] = useState("");
   const [activeTerm, setActiveTerm] = useState<Months>(terms[0]);
-  const navigate = useNavigate();
+  const { handleNavigateTo: handleNavigateToApplication, isNavigateFetching } =
+    useNavigateTo(TargetPages.APPLICATION);
 
   const loanAction = useActionCreators(loanActions);
 
@@ -91,7 +93,12 @@ export const Calculator: FC = () => {
           />
         </div>
       </div>
-      <Button onClick={() => navigate("auth/loan")}>Получить деньги</Button>
+      <Button
+        onClick={handleNavigateToApplication}
+        disabled={isNavigateFetching}
+      >
+        Получить деньги
+      </Button>
     </form>
   );
 };

@@ -4,11 +4,12 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "@/app/App";
 import { Main } from "@/pages/main";
 import { Routes } from "@/shared/lib/enums";
-import { Auth, AuthAccount, AuthLoan } from "@/pages/auth";
+import { Auth, AuthApplication, AuthOTP, AuthProfile } from "@/pages/auth";
 import { Application } from "@/pages/application";
-import { Account } from "@/pages/account";
 import { NotFound } from "@/pages/not-found";
 import { ProtectedRoute } from "../ui/ProtectedRoute";
+import { Loading } from "@/pages/loading";
+import { Profile } from "@/pages/profile";
 
 export const router = createBrowserRouter([
   {
@@ -23,24 +24,32 @@ export const router = createBrowserRouter([
       {
         path: Routes.AUTH,
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Auth />
           </Suspense>
         ),
         children: [
           {
-            path: "account",
+            path: "profile",
             element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <AuthAccount />
+              <Suspense fallback={<Loading />}>
+                <AuthProfile />
               </Suspense>
             ),
           },
           {
-            path: "loan",
+            path: "application",
             element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <AuthLoan />
+              <Suspense fallback={<Loading />}>
+                <AuthApplication />
+              </Suspense>
+            ),
+          },
+          {
+            path: "otp",
+            element: (
+              <Suspense fallback={<Loading />}>
+                <AuthOTP />
               </Suspense>
             ),
           },
@@ -52,9 +61,9 @@ export const router = createBrowserRouter([
         children: [{ path: "", element: <Application /> }],
       },
       {
-        path: Routes.ACCOUNT,
+        path: Routes.PROFILE,
         element: <ProtectedRoute />,
-        children: [{ path: "", element: <Account /> }],
+        children: [{ path: "", element: <Profile /> }],
       },
     ],
   },

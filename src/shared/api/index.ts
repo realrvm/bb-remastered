@@ -50,9 +50,9 @@ const baseQueryWithReauth: BaseQueryFn<
 
       if (response.data) {
         dispatch(
-          authActions.setAccessToken({
-            access: (response.data as { access: string }).access,
-          }),
+          authActions.setAccessToken(
+            (response.data as { access: string }).access,
+          ),
         );
         result = await baseQuery(args, api, extraOptions);
       }
@@ -61,8 +61,6 @@ const baseQueryWithReauth: BaseQueryFn<
         console.log(e.message);
       }
     }
-  } else {
-    result = await baseQuery(args, api, extraOptions);
   }
 
   return result;

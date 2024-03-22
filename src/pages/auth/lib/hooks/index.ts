@@ -4,10 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterApi } from "../../model/api/registerApi";
 import { phoneValueSchema } from "../../config/schema";
 import { isErrorWithMessage, isFetchBaseQueryError } from "../helpers";
+import { useActionCreators, useStateSelector } from "@/app/providers/rtk";
+import { getPhoneNumber, phoneActions } from "@/entities/phone";
+import { useObtainApi } from "../../model/api/obtainApi";
+import { getTargetPage } from "@/entities/target-page";
+import { authActions } from "@/features/auth";
+import { OTP_LENGTH } from "@/shared/lib/constants";
 
 export function useRegister() {
   const [phoneValue, setPhoneValue] = useState("");
   const [error, setError] = useState("");
+  const phoneAction = useActionCreators(phoneActions);
 
   const navigate = useNavigate();
 
@@ -24,9 +31,13 @@ export function useRegister() {
       setError("");
 
       try {
-        await register({ phone_number: `+7${phoneValue}` }).unwrap();
+        const phone_number = `+7${phoneValue}`;
 
-        navigate("auth/otp");
+        await register({ phone_number }).unwrap();
+
+        phoneAction.setPhone(phone_number);
+
+        navigate("/auth/otp");
       } catch (err) {
         setPhoneValue("");
 
@@ -46,7 +57,7 @@ export function useRegister() {
         }
       }
     },
-    [phoneValue, register, navigate],
+    [phoneValue, register, navigate, phoneAction],
   );
 
   return {
@@ -56,4 +67,39 @@ export function useRegister() {
     error,
     isPhoneReady,
   };
+}
+
+export function useOTP() {
+  const [otp, setOtp] = useState("");
+  const [isResendable, setIsResendable] = useState(true);
+
+  const [obtain] = useObtainApi({ fixedCacheKey: "shared-obtain-post" });
+  const navigate = useNavigate();
+
+  const authAction = useActionCreators(authActions);
+
+  const phone = useStateSelector(getPhoneNumber);
+  const targetPage = useStateSelector(getTargetPage);
+
+  const sendAuthDataToServer = useCallback(async () => {
+    try {
+      const { access, refresh } = await obtain({
+        phone_number: phone,
+        password: otp,
+      }).unwrap();
+
+      authAction.setAccessToken(access);
+      authAction.setRefreshToken(refresh);
+      if (targetPage) navigate(`/${targetPage}`);
+    } catch (e) {
+      setOtp("");
+    }
+  }, [otp, phone, targetPage, navigate, obtain, authAction]);
+
+  if (otp.length === OTP_LENGTH && isResendable) {
+    sendAuthDataToServer();
+    setIsResendable(false);
+  }
+
+  return { otp, setOtp, setIsResendable, phone };
 }

@@ -8,7 +8,7 @@ import { InputMask } from "@/shared/ui/input-mask";
 import { useRegister } from "../../lib/hooks";
 import { Loader } from "@/shared/ui/loader";
 
-const AuthLoan: FC = () => {
+const AuthLApplication: FC = () => {
   const [checked, isChecked] = useState(false);
   const {
     setPhoneValue,
@@ -47,7 +47,10 @@ const AuthLoan: FC = () => {
                 <span className="text-small text-special-red">{error}</span>
               )}
             </label>
-            <AuthLoanAgreement checked={checked} handleCheck={handleCheck} />
+            <AuthApplicationAgreement
+              checked={checked}
+              handleCheck={handleCheck}
+            />
           </>
         )}
         <Button disabled={!(isPhoneReady && checked) || isLoadingRegistration}>
@@ -58,7 +61,7 @@ const AuthLoan: FC = () => {
   );
 };
 
-const AuthLoanAgreement: FC<{
+const AuthApplicationAgreement: FC<{
   checked: boolean;
   handleCheck: (state: boolean) => void;
 }> = memo(({ checked, handleCheck }) => {
@@ -77,4 +80,4 @@ const AuthLoanAgreement: FC<{
   );
 });
 
-export default AuthLoan;
+export default AuthLApplication;

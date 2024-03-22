@@ -6,7 +6,7 @@ import { InputMask } from "@/shared/ui/input-mask";
 import { Loader } from "@/shared/ui/loader";
 import { useRegister } from "../../lib/hooks";
 
-const AuthAccount: FC = () => {
+const AuthProfile: FC = () => {
   const {
     setPhoneValue,
     isLoadingRegistration,
@@ -50,4 +50,4 @@ const AuthAccount: FC = () => {
   );
 };
 
-export default AuthAccount;
+export default AuthProfile;

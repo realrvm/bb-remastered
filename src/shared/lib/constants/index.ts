@@ -36,4 +36,7 @@ export const TELEGRAM = "https://t.me/bibimoney";
 export const WHATSAPP = "whatsapp://send?phone=1234567890";
 
 // is digits
-export const DIGITS = new RegExp(/^\d+$/);
+export const DIGIT_REGEX = new RegExp(/^\d+$/);
+
+// otp
+export const OTP_LENGTH = 6;

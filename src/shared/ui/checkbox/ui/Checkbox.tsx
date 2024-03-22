@@ -29,7 +29,7 @@ export const Checkbox: FC<CheckboxProps> = forwardRef<
         className={clsx(
           styles["checkbox"],
           { [styles["checked"]]: isChecked },
-          className,
+          className, 'cursor-pointer'
         )}
         checked={isChecked}
         onChange={(e) => handleCheck(e.target.checked)}
