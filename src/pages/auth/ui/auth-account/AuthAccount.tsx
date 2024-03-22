@@ -1,11 +1,19 @@
+import { FC } from "react";
+
 import { Button } from "@/shared/ui/button";
 import { Account } from "@/shared/ui/icons";
 import { InputMask } from "@/shared/ui/input-mask";
 import { Loader } from "@/shared/ui/loader";
 import { useRegister } from "../../lib/hooks";
 
-const AuthAccount = () => {
-  const [setPhoneValue, isLoadingRegistration, handleSubmit] = useRegister();
+const AuthAccount: FC = () => {
+  const {
+    setPhoneValue,
+    isLoadingRegistration,
+    handleSubmit,
+    error,
+    isPhoneReady,
+  } = useRegister();
 
   return (
     <>
@@ -26,12 +34,17 @@ const AuthAccount = () => {
         {isLoadingRegistration ? (
           <Loader className="min-w-[300px] flex justify-center mb-[50px]" />
         ) : (
-          <label className="mb-6">
+          <label className="mb-12">
             <span className="inline-block mb-2">Номер телефона</span>
             <InputMask setCard={setPhoneValue} />
+            {error && (
+              <span className="text-small text-special-red">{error}</span>
+            )}
           </label>
         )}
-        <Button>Получить код из СМС</Button>
+        <Button disabled={!isPhoneReady || isLoadingRegistration}>
+          Получить код из СМС
+        </Button>
       </form>
     </>
   );
