@@ -4,7 +4,7 @@ import { LoanSchema } from "../types";
 
 const initialState: LoanSchema = {
   term: "24",
-  funding: 0,
+  funding: 50000,
 };
 
 const loanSlice = createSlice({

@@ -5,6 +5,7 @@ import { Account } from "@/shared/ui/icons";
 import { InputMask } from "@/shared/ui/input-mask";
 import { Loader } from "@/shared/ui/loader";
 import { useRegister } from "../../lib/hooks";
+import { Auth } from "../Auth";
 
 const AuthProfile: FC = () => {
   const {
@@ -16,7 +17,7 @@ const AuthProfile: FC = () => {
   } = useRegister();
 
   return (
-    <>
+    <Auth>
       <div className="w-12 h-12 shrink-0 rounded-full bg-icon-bg mb-6 grid place-items-center">
         <Account />
       </div>
@@ -46,7 +47,7 @@ const AuthProfile: FC = () => {
           Получить код из СМС
         </Button>
       </form>
-    </>
+    </Auth>
   );
 };
 

@@ -1,5 +1,6 @@
 import { z } from "zod";
 
-export const refreshTokenSchema = z.string().min(1);
-
-export const accessTokenSchema = z.string().min(1);
+export const tokenSchema = z.object({
+  access: z.string().min(1),
+  refresh: z.string().optional(),
+});

@@ -1,0 +1,18 @@
+.flag {
+  position: relative;
+  font:
+    400 12px/12px "Inter",
+    sans-serif;
+  color: var(--color-text-gray);
+  transform: translateY(2px);
+}
+
+.flag:after {
+  content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none"><g clip-path="url(%23clip0_11422_907)"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H16V12H0V0Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 4H16V11.9999H0V4Z" fill="%230039A6"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 8H16V12.0001H0V8Z" fill="%23D52B1E"/></g><rect x="0.5" y="0.5" width="15" height="11" rx="3.5" stroke="%23E2E2E2"/><defs><clipPath id="clip0_11422_907"><rect width="16" height="12" rx="4" fill="white"/></clipPath></defs></svg>');
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 12px;
+  top: -1px;
+  left: 30px;
+}

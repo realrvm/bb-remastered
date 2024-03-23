@@ -5,7 +5,12 @@ import type {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 
-import { API_URL, TOKEN_REFRESH } from "@/shared/lib/constants";
+import {
+  API_URL,
+  STORAGE,
+  STORAGE_TOKEN,
+  TOKEN_REFRESH,
+} from "@/shared/lib/constants";
 import { RootState } from "@/app/providers/rtk/";
 import { authActions } from "@/features/auth";
 
@@ -29,14 +34,15 @@ const baseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  const { dispatch, getState } = api;
-  const state = getState() as RootState;
+  const { dispatch } = api;
 
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
     try {
-      const token = state.auth.refreshToken;
+      const token = JSON.parse(
+        STORAGE.getItem(STORAGE_TOKEN) || JSON.stringify(""),
+      ) as string;
 
       const response = await baseQuery(
         {
@@ -50,9 +56,9 @@ const baseQueryWithReauth: BaseQueryFn<
 
       if (response.data) {
         dispatch(
-          authActions.setAccessToken(
-            (response.data as { access: string }).access,
-          ),
+          authActions.setAccessToken({
+            access: (response.data as { access: string }).access,
+          }),
         );
         result = await baseQuery(args, api, extraOptions);
       }

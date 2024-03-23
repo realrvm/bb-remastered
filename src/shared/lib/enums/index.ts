@@ -7,8 +7,9 @@ export const enum Routes {
 }
 
 export const enum TargetPages {
-  PROFILE = Routes.PROFILE,
-  APPLICATION = Routes.APPLICATION,
+  PROFILE = `${Routes.PROFILE}/main`,
+  APPLICATION_VEHICLE = `${Routes.APPLICATION}/vehicle`,
+  APPLICATION_CALCULATOR = `${Routes.APPLICATION}/calculator`,
   AUTH = Routes.AUTH,
   INITIAL = "",
 }

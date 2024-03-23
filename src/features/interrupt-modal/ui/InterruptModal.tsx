@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/shared/ui/button";
 import { Modal } from "@/widgets/modal";
 import { ButtonThemes } from "@/shared/lib/enums";
+import { useHandleInterruption } from "../lib/hooks";
 
 type ApplicationRefusalModalType = {
   isOpenModal: boolean;
@@ -14,7 +14,7 @@ export const InterruptModal: FC<ApplicationRefusalModalType> = ({
   isOpenModal,
   setIsOpenModal,
 }) => {
-  const navigate = useNavigate();
+  const { handleInterruption } = useHandleInterruption();
 
   return (
     <Modal isOpen={isOpenModal} onClose={() => setIsOpenModal(false)}>
@@ -50,7 +50,7 @@ export const InterruptModal: FC<ApplicationRefusalModalType> = ({
               Остаться
             </Button>
             <Button
-              onClick={() => navigate("/")}
+              onClick={handleInterruption}
               className="w-full md:w-auto py-3 px-5 heading-5"
             >
               Прервать

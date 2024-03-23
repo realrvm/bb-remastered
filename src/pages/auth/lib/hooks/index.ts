@@ -88,8 +88,7 @@ export function useOTP() {
         password: otp,
       }).unwrap();
 
-      authAction.setAccessToken(access);
-      authAction.setRefreshToken(refresh);
+      authAction.setAccessToken({ access, refresh });
       if (targetPage) navigate(`/${targetPage}`);
     } catch (e) {
       setOtp("");

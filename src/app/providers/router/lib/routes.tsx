@@ -4,12 +4,17 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "@/app/App";
 import { Main } from "@/pages/main";
 import { Routes } from "@/shared/lib/enums";
-import { Auth, AuthApplication, AuthOTP, AuthProfile } from "@/pages/auth";
-import { Application } from "@/pages/application";
+import { AuthApplication, AuthOTP, AuthProfile } from "@/pages/auth";
+import {
+  ApplicationCalculator,
+  ApplicationDocs,
+  ApplicationReview,
+  ApplicationVehicle,
+} from "@/pages/application";
 import { NotFound } from "@/pages/not-found";
-import { ProtectedRoute } from "../ui/ProtectedRoute";
 import { Loading } from "@/pages/loading";
-import { Profile } from "@/pages/profile";
+import { ProtectedRoute } from "../ui/ProtectedRoute";
+import { ProfileMain } from "@/pages/profile";
 
 export const router = createBrowserRouter([
   {
@@ -22,48 +27,73 @@ export const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: Routes.AUTH,
+        path: `${Routes.AUTH}/profile`,
         element: (
           <Suspense fallback={<Loading />}>
-            <Auth />
+            <AuthProfile />
           </Suspense>
         ),
+      },
+      {
+        path: `${Routes.AUTH}/application`,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <AuthApplication />
+          </Suspense>
+        ),
+      },
+      {
+        path: `${Routes.AUTH}/otp`,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <AuthOTP />
+          </Suspense>
+        ),
+      },
+      {
+        element: <ProtectedRoute />,
         children: [
           {
-            path: "profile",
+            path: `${Routes.APPLICATION}/calculator`,
             element: (
               <Suspense fallback={<Loading />}>
-                <AuthProfile />
+                <ApplicationCalculator />
               </Suspense>
             ),
           },
           {
-            path: "application",
+            path: `${Routes.APPLICATION}/vehicle`,
             element: (
               <Suspense fallback={<Loading />}>
-                <AuthApplication />
+                <ApplicationVehicle />
               </Suspense>
             ),
           },
           {
-            path: "otp",
+            path: `${Routes.APPLICATION}/docs`,
             element: (
               <Suspense fallback={<Loading />}>
-                <AuthOTP />
+                <ApplicationDocs />
+              </Suspense>
+            ),
+          },
+          {
+            path: `${Routes.APPLICATION}/review`,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ApplicationReview />
+              </Suspense>
+            ),
+          },
+          {
+            path: `${Routes.PROFILE}/main`,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ProfileMain />
               </Suspense>
             ),
           },
         ],
-      },
-      {
-        path: Routes.APPLICATION,
-        element: <ProtectedRoute />,
-        children: [{ path: "", element: <Application /> }],
-      },
-      {
-        path: Routes.PROFILE,
-        element: <ProtectedRoute />,
-        children: [{ path: "", element: <Profile /> }],
       },
     ],
   },

@@ -7,6 +7,7 @@ import { Funding } from "@/shared/ui/icons";
 import { InputMask } from "@/shared/ui/input-mask";
 import { useRegister } from "../../lib/hooks";
 import { Loader } from "@/shared/ui/loader";
+import { Auth } from "../Auth";
 
 const AuthLApplication: FC = () => {
   const [checked, isChecked] = useState(false);
@@ -23,7 +24,7 @@ const AuthLApplication: FC = () => {
   }, []);
 
   return (
-    <>
+    <Auth>
       <div className="w-12 h-12 shrink-0 rounded-full bg-icon-bg mb-6 grid place-items-center">
         <Funding />
       </div>
@@ -57,7 +58,7 @@ const AuthLApplication: FC = () => {
           Получить код из СМС
         </Button>
       </form>
-    </>
+    </Auth>
   );
 };
 

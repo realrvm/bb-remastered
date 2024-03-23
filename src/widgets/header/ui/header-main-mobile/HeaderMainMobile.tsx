@@ -40,7 +40,7 @@ const DrawerContent = () => {
   const {
     handleNavigateTo: handleNavigateToApplication,
     isNavigateFetching: isNavigateFetchingToApplication,
-  } = useNavigateTo(TargetPages.APPLICATION);
+  } = useNavigateTo(TargetPages.APPLICATION_CALCULATOR);
 
   return (
     <>

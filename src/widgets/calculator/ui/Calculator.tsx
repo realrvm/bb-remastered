@@ -26,16 +26,16 @@ import { useHelpText, useLoanCalculator } from "../lib/hooks";
 import { useActionCreators } from "@/app/providers/rtk";
 import { loanActions } from "@/entities/loan";
 import { useNavigateTo } from "@/shared/lib/hooks/useNavigateTo";
+import { TargetPages } from "@/shared/lib/enums";
 
 import "react-range-slider-input/dist/style.css";
-import { TargetPages } from "@/shared/lib/enums";
 
 export const Calculator: FC = () => {
   const [rangeValue, setRangeValue] = useState(1);
   const [marketPrice, setMarketPrice] = useState("");
   const [activeTerm, setActiveTerm] = useState<Months>(terms[0]);
   const { handleNavigateTo: handleNavigateToApplication, isNavigateFetching } =
-    useNavigateTo(TargetPages.APPLICATION);
+    useNavigateTo(TargetPages.APPLICATION_VEHICLE);
 
   const loanAction = useActionCreators(loanActions);
 
@@ -47,6 +47,8 @@ export const Calculator: FC = () => {
     const funding = Number(getOnlyDigits(value));
 
     loanAction.setLoan({ term: activeTerm, funding });
+
+    handleNavigateToApplication();
   };
 
   return (
@@ -93,17 +95,12 @@ export const Calculator: FC = () => {
           />
         </div>
       </div>
-      <Button
-        onClick={handleNavigateToApplication}
-        disabled={isNavigateFetching}
-      >
-        Получить деньги
-      </Button>
+      <Button disabled={isNavigateFetching}>Получить деньги</Button>
     </form>
   );
 };
 
-const CalculatorRangeSlider: FC<{
+export const CalculatorRangeSlider: FC<{
   setRangeValue: (val: number) => void;
 }> = memo(({ setRangeValue }) => {
   return (
@@ -119,7 +116,7 @@ const CalculatorRangeSlider: FC<{
   );
 });
 
-const CalculatorMonthsList: FC<{
+export const CalculatorMonthsList: FC<{
   activeTerm: Months;
   setActiveTerm: (val: Months) => void;
 }> = memo(({ activeTerm, setActiveTerm }) => {
@@ -128,6 +125,7 @@ const CalculatorMonthsList: FC<{
       {terms.map((term) => (
         <li key={term} className="flex-1">
           <button
+            type="button"
             className={cn(
               "w-full px-4 py-3",
               activeTerm === term ? "btn-selected" : "btn-clean",

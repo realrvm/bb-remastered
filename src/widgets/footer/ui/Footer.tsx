@@ -18,7 +18,7 @@ import { cn } from "@/shared/lib/cn";
 
 export const Footer: FC<{ className?: string }> = ({ className = "" }) => {
   const { handleNavigateTo: handleNavigateToApplication, isNavigateFetching } =
-    useNavigateTo(TargetPages.APPLICATION);
+    useNavigateTo(TargetPages.APPLICATION_CALCULATOR);
 
   return (
     <footer className={cn("bg-brand-light py-[1.75rem] md:py-12", className)}>

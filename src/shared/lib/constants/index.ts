@@ -2,8 +2,8 @@
 export const API_URL = "https://api.bibimoney.ru/api/v1";
 
 // paths
-export const TOKEN_REFRESH = "/token/refresh";
-export const CONFIG_PATH = "/config";
+export const TOKEN_REFRESH = "/token/refresh/";
+export const CONFIG_PATH = "/config/";
 
 // mods
 export const IS_DEV = import.meta.env.DEV;
@@ -18,6 +18,7 @@ export const MAX_ACCORDION_INDEX = 333;
 
 // storage
 export const STORAGE = window.sessionStorage;
+export const LOCAL_STORAGE_SITE_HAS_VISITED = "has_visited";
 
 // storage tokens
 export const STORAGE_TOKEN = "token";
@@ -40,3 +41,11 @@ export const DIGIT_REGEX = new RegExp(/^\d+$/);
 
 // otp
 export const OTP_LENGTH = 6;
+
+// plate length
+export const CORRECT_PLATE_LENGTH = 6;
+export const SHORT_REGION_NUMBER = 2;
+export const LONG_REGION_NUMBER = 3;
+
+// polling interval
+export const POLLING_INTERVAL = 1000;

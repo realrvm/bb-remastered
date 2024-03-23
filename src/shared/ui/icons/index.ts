@@ -5,3 +5,4 @@ export { Cash } from "./Cash";
 export { Info } from "./Info";
 export { Funding } from "./Funding";
 export { Account } from "./Account";
+export { Clock } from "./Clock";
