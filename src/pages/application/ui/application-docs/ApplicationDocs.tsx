@@ -64,7 +64,7 @@ const ApplicationDocsView: FC<{ view: Side }> = memo(({ view }) => {
         <span className="heading-5">{autoView[view]}</span>
       </div>
       <div>
-        {previewImage ? (
+        {!previewImage ? (
           <label className="relative inline-block">
             <span className={cn("heading-5", styles["file-input"])}>
               Прикрепить
@@ -78,7 +78,7 @@ const ApplicationDocsView: FC<{ view: Side }> = memo(({ view }) => {
             />
           </label>
         ) : (
-          <div className="w-15 h-15 rounded-lg overflow-hidden">
+          <div className="w-[60px] h-[60px] rounded-lg overflow-hidden">
             <img
               className="h-full w-full object-cover"
               src={previewImage as string}

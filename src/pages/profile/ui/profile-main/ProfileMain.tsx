@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Profile } from "../Profile";
 
 const ProfileMain: FC = () => {
-  return <Profile>ProfileMain: FC</Profile>;
+  return <Profile title="Заявки">Заявки</Profile>;
 };
 
 export default ProfileMain;

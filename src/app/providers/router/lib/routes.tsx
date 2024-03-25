@@ -14,7 +14,13 @@ import {
 import { NotFound } from "@/pages/not-found";
 import { Loading } from "@/pages/loading";
 import { ProtectedRoute } from "../ui/ProtectedRoute";
-import { ProfileMain } from "@/pages/profile";
+import {
+  ProfileActive,
+  ProfileClient,
+  ProfileDocs,
+  ProfileMain,
+  ProfilePersonal,
+} from "@/pages/profile";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +96,38 @@ export const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Loading />}>
                 <ProfileMain />
+              </Suspense>
+            ),
+          },
+          {
+            path: `${Routes.PROFILE}/active`,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ProfileActive />
+              </Suspense>
+            ),
+          },
+          {
+            path: `${Routes.PROFILE}/personal`,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ProfilePersonal />
+              </Suspense>
+            ),
+          },
+          {
+            path: `${Routes.PROFILE}/docs`,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ProfileDocs />
+              </Suspense>
+            ),
+          },
+          {
+            path: `${Routes.PROFILE}/client`,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ProfileClient />
               </Suspense>
             ),
           },

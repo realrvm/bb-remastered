@@ -5,11 +5,11 @@ import { useStateSelector } from "../../rtk";
 import { getAccessToken } from "@/features/auth";
 
 export const ProtectedRoute: FC = () => {
-  const token = useStateSelector(getAccessToken);
-
-  if (!token) {
-    return <Navigate to="/auth/profile" />;
-  }
+  // const token = useStateSelector(getAccessToken);
+  //
+  // if (!token) {
+  //   return <Navigate to="/" />;
+  // }
 
   return <Outlet />;
 };
